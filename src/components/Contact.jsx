@@ -9,7 +9,7 @@ import {
 // 🔑 ENTER YOUR WEB3FORMS ACCESS KEY HERE:
 // Get a free key instantly at: https://web3forms.com/
 // ==========================================
-const WEB3FORMS_ACCESS_KEY = "YOUR_ACCESS_KEY_HERE"; 
+const WEB3FORMS_ACCESS_KEY = "d482ac93-42a2-4472-b22a-2c9d5b8cf836"; 
 
 const Contact = () => {
   const [formData, setFormData] = useState({ 
