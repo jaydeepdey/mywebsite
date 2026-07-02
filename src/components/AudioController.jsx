@@ -11,7 +11,7 @@ const AudioController = () => {
   // Setup HTML5 Audio element using encoded URL for file with spaces
   useEffect(() => {
     // URL-encode the filename so the browser can resolve the path correctly
-    const audio = new Audio('/Sunlit%20Carousel.mp4');
+    const audio = new Audio('/Riverleaf%20Lullaby.mp4');
     audio.loop = true;
     audio.volume = 0.35;
     audio.preload = 'auto';
