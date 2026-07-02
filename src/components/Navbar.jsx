@@ -89,7 +89,7 @@ const Navbar = ({ activeSection, setActiveSection }) => {
                   </span>
 
                   {/* Hover tooltip label */}
-                  <span className={`sidebar-tooltip ${isHovered || isActive ? 'visible' : ''}`} aria-hidden="true">
+                  <span className={`sidebar-tooltip ${isHovered ? 'visible' : ''}`} aria-hidden="true">
                     {item.label}
                   </span>
                 </button>
