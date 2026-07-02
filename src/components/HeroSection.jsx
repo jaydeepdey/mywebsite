@@ -248,11 +248,23 @@ const HeroSection = ({ setActiveSection }) => {
           transform: translateX(3px);
         }
 
-        .hero-visual {
+         .hero-visual {
           display: flex;
           align-items: center;
           justify-content: center;
           gap: 20px;
+        }
+
+        @media (max-width: 600px) {
+          .hero-visual {
+            flex-direction: column;
+            gap: 16px;
+            width: 100%;
+          }
+          .quote-card {
+            max-width: 280px !important;
+            text-align: center;
+          }
         }
 
         .quote-card {
