@@ -28,6 +28,12 @@ const SaaSProducts = ({ setActiveSection }) => {
   const [isGenerating, setIsGenerating] = useState(false);
   const [hasGenerated, setHasGenerated] = useState(false);
   const [copiedType, setCopiedType] = useState(null); // 'linkedin' | 'twitter' | 'newsletter'
+  const [apiError, setApiError] = useState(''); // API error message
+
+  // The base URL of the FastAPI server.
+  // For local dev: http://localhost:8000
+  // When you deploy the API to the cloud, change this one line.
+  const API_BASE_URL = 'http://localhost:8000';
 
   // Output content state
   const [outputs, setOutputs] = useState({
@@ -36,33 +42,65 @@ const SaaSProducts = ({ setActiveSection }) => {
     newsletter: ''
   });
 
-  const handleRepurpose = (e) => {
+  const handleRepurpose = async (e) => {
     e.preventDefault();
     const inputVal = inputMode === 'text' ? sourceText : sourceUrl;
     if (!inputVal) return;
 
     setIsGenerating(true);
+    setApiError('');
 
-    // Simulate AI generation lag
-    setTimeout(() => {
-      const subject = inputMode === 'text' 
-        ? (sourceText.length > 50 ? sourceText.substring(0, 50) + "..." : sourceText)
-        : sourceUrl;
+    try {
+      // Build request body — send text or url depending on mode
+      const body = inputMode === 'text'
+        ? { text: sourceText }
+        : { url: sourceUrl };
 
-      // Premium generated templates summarizing input context
-      setOutputs({
-        linkedin: `🚀 Repurposed from: ${subject}\n\nOver the last few years, scaling systems and maintaining agility has become the ultimate business differentiator. Technology shouldn't be a cost center—it is the core driver of growth.\n\nHere are 3 core pillars of execution:\n\n1️⃣ Keep it Lightweight: Solve specific bottlenecks first rather than building bloated software.\n2️⃣ Optimize for Edge Speeds: Micro-SaaS tools deployed globally on Serverless runtimes load in milliseconds.\n3️⃣ Drive Continuous Feedback: Tools like PulsePoll prove that instant response loop increases product adaptation.\n\nWhat is your team's strategy for keeping delivery processes lean and fast? Let me know below! 👇\n\n#MicroSaaS #WebDevelopment #SaaSGrowth #Serverless #Productivity`,
-        twitter: [
-          `1/ How do you scale workflow processes without introducing bloated enterprise architectures? Keep it simple. Let's look at a quick blueprint: 🧵👇`,
-          `2/ Leverage Micro-SaaS. Instead of monolith modules, deploy edge-rendered serverless functions. High speed, zero cold starts, global scaling.`,
-          `3/ Gather instant telemetry. Use real-time feedback mechanisms like PulsePoll to validate features and course-correct programs instantly.`
-        ],
-        newsletter: `Hi Reader,\n\nI hope your week is starting strong. \n\nToday, we're discussing system scalability and how teams often over-engineer simple solutions. Over my 26 years directing digital transformations at TCS, I've seen that the most robust architectures are actually the leanest ones.\n\nHere is what you need to focus on this week:\n- **Build Edge-First**: Deploy services using Vercel or Cloudflare workers to reduce latencies globally.\n- **Keep Feedback Instant**: Create direct, interactive communication loops with users.\n- **Adopt Micro-SaaS**: Keep tools highly focused on solving single, high-friction tasks.\n\nIf you want to dive deeper into how we design these lightweight systems, hit reply or check out our active prototypes in my portfolio.\n\nBest,\nJaydeep`
+      const res = await fetch(`${API_BASE_URL}/repurpose`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
       });
 
-      setIsGenerating(false);
+      if (!res.ok) {
+        // Parse error detail from FastAPI response
+        let errMsg = `Server error (${res.status})`;
+        try {
+          const errData = await res.json();
+          errMsg = errData.detail || errMsg;
+        } catch (_) { /* ignore parse failures */ }
+        throw new Error(errMsg);
+      }
+
+      const data = await res.json();
+
+      // The pipeline returns twitter as a single string with paragraphs;
+      // split it into an array for the thread display.
+      const twitterTweets = (data.twitter || '')
+        .split(/\n\n+/)
+        .map(t => t.trim())
+        .filter(Boolean);
+
+      setOutputs({
+        linkedin: data.linkedin || '',
+        twitter: twitterTweets,
+        newsletter: data.newsletter || '',
+      });
       setHasGenerated(true);
-    }, 1500);
+
+    } catch (err) {
+      // Show a user-friendly error — most likely the API server is not running
+      if (err.message && err.message.toLowerCase().includes('fetch')) {
+        setApiError(
+          '⚠️ Cannot reach the AI pipeline server. Please start the API server locally '
+          + '(run start_api.bat in the Content Repurposing Tool folder) and try again.'
+        );
+      } else {
+        setApiError(`⚠️ Generation failed: ${err.message}`);
+      }
+    } finally {
+      setIsGenerating(false);
+    }
   };
 
   const handleCopy = (text, type) => {
@@ -75,6 +113,7 @@ const SaaSProducts = ({ setActiveSection }) => {
     setSourceText('');
     setSourceUrl('');
     setHasGenerated(false);
+    setApiError('');
     setOutputs({ linkedin: '', twitter: [], newsletter: '' });
   };
 
@@ -252,7 +291,7 @@ const SaaSProducts = ({ setActiveSection }) => {
             >
               {isGenerating ? (
                 <>
-                  <RefreshCw size={13} className="spin-icon" /> Generating outputs...
+                  <RefreshCw size={13} className="spin-icon" /> Running AI pipeline...
                 </>
               ) : (
                 <>
@@ -262,6 +301,14 @@ const SaaSProducts = ({ setActiveSection }) => {
             </button>
           </div>
         </form>
+
+        {/* ── API Error Banner ── */}
+        {apiError && (
+          <div className="api-error-banner">
+            <span>{apiError}</span>
+            <button className="error-dismiss-btn" onClick={() => setApiError('')}>✕</button>
+          </div>
+        )}
 
         {/* ── Generated Output Displays ── */}
         {hasGenerated && (
@@ -882,6 +929,43 @@ const SaaSProducts = ({ setActiveSection }) => {
         .tweet-text-content pre {
           font-size: 12.5px;
           color: var(--text-secondary);
+        }
+
+        /* API Error Banner */
+        .api-error-banner {
+          display: flex;
+          align-items: flex-start;
+          justify-content: space-between;
+          gap: 12px;
+          padding: 14px 18px;
+          background: rgba(245, 158, 11, 0.1);
+          border: 1px solid rgba(245, 158, 11, 0.35);
+          border-radius: 10px;
+          color: #fcd34d;
+          font-size: 13.5px;
+          line-height: 1.55;
+          animation: fade-in-down 0.3s ease;
+        }
+
+        @keyframes fade-in-down {
+          from { opacity: 0; transform: translateY(-6px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .error-dismiss-btn {
+          flex-shrink: 0;
+          background: none;
+          border: none;
+          color: #fcd34d;
+          font-size: 14px;
+          cursor: pointer;
+          opacity: 0.7;
+          padding: 0 4px;
+          transition: opacity 0.2s;
+        }
+
+        .error-dismiss-btn:hover {
+          opacity: 1;
         }
       `}</style>
 
