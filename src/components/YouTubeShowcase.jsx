@@ -7,45 +7,65 @@ const YouTubeShowcase = () => {
 
   const videos = [
     {
-      id: 'vid-empty-chair',
+      id: 'CwawGAclyMI',
       title: 'The empty chair. ☕️',
-      description: 'A cinematic short story exploring reflection, memory, and the quiet power of resilience.',
       category: 'Cinematic',
-      thumbnail: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80',
-      videoUrl: 'https://www.youtube.com/@BrandFrame-yt'
     },
     {
-      id: 'vid-lost-everything',
+      id: 'SMzTuuUfHig',
       title: 'She Lost Everything, Then She Did This.',
-      description: 'An inspirational mindset feature on transformation, overcoming failure, and starting over.',
+      category: 'Motivation',
+    },
+    {
+      id: 'MDco60wLtmM',
+      title: 'The Day a Whole Class Failed... and the Reason Will Make You Cry',
+      category: 'Storytelling',
+    },
+    {
+      id: 'Puo5jBZL_Eg',
+      title: 'Why I stopped being so obsessed with "mine."',
       category: 'Mindset',
-      thumbnail: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80',
-      videoUrl: 'https://www.youtube.com/@BrandFrame-yt'
     },
     {
-      id: 'vid-dey-jewellers',
-      title: 'Dey Jewellers Commercial',
-      description: 'A premium 30-second digital ad blending heritage aesthetics with contemporary luxury.',
+      id: 'XIcmva5NIB0',
+      title: 'Unexpected Exposure',
+      category: 'Short Film',
+    },
+    {
+      id: '8cTQz5m5ZIA',
+      title: 'Cute College Love Story',
+      category: 'Story',
+    },
+    {
+      id: 'wG_m-vkBjAA',
+      title: 'Cute Love Story',
+      category: 'Story',
+    },
+    {
+      id: '8NY6UsaoM_o',
+      title: 'Masterpiece of Master Chef',
+      category: 'Creative',
+    },
+    {
+      id: '3gNnPae_txQ',
+      title: 'Beyond Fashion: Wear Who You Are | UrbandripFinal Cut',
       category: 'Brand Ad',
-      thumbnail: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=800&q=80',
-      videoUrl: 'https://www.youtube.com/@BrandFrame-yt'
     },
     {
-      id: 'vid-corporate-showcase',
-      title: 'Corporate Showcase Reel',
-      description: 'A showcase of spec ads, business promotional reels, and brand commercials for digital impact.',
-      category: 'Business',
-      thumbnail: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80',
-      videoUrl: 'https://www.youtube.com/@BrandFrame-yt'
+      id: 'vgFMS9po2hk',
+      title: 'Ditch the Traffic: Upgrade Your Commute with Stryder',
+      category: 'Brand Ad',
     },
     {
-      id: 'vid-festival-campaigns',
-      title: 'Festival & Cultural Campaigns',
-      description: 'High-energy promotional videos created for festivals, community celebrations, and brands.',
-      category: 'Events',
-      thumbnail: 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=800&q=80',
-      videoUrl: 'https://www.youtube.com/@BrandFrame-yt'
-    }
+      id: 'WWIYFEO6qiI',
+      title: 'Luxury Jewellery Brand Ad | Dey Jewellers | 30-Second Cinematic Campaign',
+      category: 'Commercial',
+    },
+    {
+      id: 'YVWJNE7ls-8',
+      title: 'Want Ads That Convert? 30s Shampoo Spec Commercial | Clearhead',
+      category: 'Spec Ad',
+    },
   ];
 
   return (
@@ -74,25 +94,32 @@ const YouTubeShowcase = () => {
         </a>
       </div>
 
-      {/* ── Videos: 5 in one landscape row ── */}
+      {/* ── Videos: 5 per row, 12 total (3 rows) ── */}
       <div className="yt-videos-section">
-        <h2 className="yt-section-title title-font">Channel <span className="text-gradient">Videos</span></h2>
+        <h2 className="yt-section-title title-font">Channel <span className="text-gradient">Videos</span>
+          <span className="yt-count">{videos.length} videos</span>
+        </h2>
 
         <div className="yt-grid">
           {videos.map((vid) => (
             <a
-              href={vid.videoUrl}
+              href={`https://www.youtube.com/watch?v=${vid.id}`}
               target="_blank"
               rel="noopener noreferrer"
               key={vid.id}
               className="yt-card glass-panel"
             >
-              {/* Landscape 16:9 Thumbnail */}
+              {/* Landscape 16:9 Thumbnail — real YouTube image */}
               <div className="yt-thumb-wrap">
-                <img src={vid.thumbnail} alt={vid.title} className="yt-thumb-img" />
+                <img
+                  src={`https://i.ytimg.com/vi/${vid.id}/hqdefault.jpg`}
+                  alt={vid.title}
+                  className="yt-thumb-img"
+                  loading="lazy"
+                />
                 <div className="yt-play-overlay">
                   <div className="yt-play-btn">
-                    <Play size={15} fill="#fff" className="yt-play-icon" />
+                    <Play size={14} fill="#fff" className="yt-play-icon" />
                   </div>
                 </div>
                 <span className="yt-cat-badge">{vid.category}</span>
@@ -101,10 +128,9 @@ const YouTubeShowcase = () => {
               {/* Card Text */}
               <div className="yt-card-body">
                 <h3 className="yt-card-title title-font">{vid.title}</h3>
-                <p className="yt-card-desc">{vid.description}</p>
                 <div className="yt-card-footer">
-                  <span>Watch</span>
-                  <ExternalLink size={10} className="yt-ext-icon" />
+                  <span>Watch on YouTube</span>
+                  <ExternalLink size={9} className="yt-ext-icon" />
                 </div>
               </div>
             </a>
@@ -113,22 +139,26 @@ const YouTubeShowcase = () => {
       </div>
 
       <style>{`
-        /* ── Page root: fixed single-viewport height ── */
+        /* ── Page root ── */
         .yt-page {
           display: flex;
           flex-direction: column;
-          height: calc(100vh - 80px);
           padding: 16px 0 10px;
-          gap: 16px;
-          overflow: hidden;
+          gap: 14px;
+          overflow-y: auto;
+          height: calc(100vh - 80px);
         }
+
+        .yt-page::-webkit-scrollbar { width: 4px; }
+        .yt-page::-webkit-scrollbar-track { background: transparent; }
+        .yt-page::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 4px; }
 
         /* ── Compact horizontal header ── */
         .yt-header {
           display: flex;
           align-items: center;
-          gap: 16px;
-          padding: 14px 20px;
+          gap: 14px;
+          padding: 12px 18px;
           border-radius: 14px;
           border: 1px solid rgba(255, 255, 255, 0.07);
           background: rgba(18, 12, 45, 0.3);
@@ -137,15 +167,15 @@ const YouTubeShowcase = () => {
         }
 
         .yt-avatar-ring {
-          width: 48px;
-          height: 48px;
+          width: 44px;
+          height: 44px;
           border-radius: 50%;
           padding: 2px;
           background: linear-gradient(135deg, #ff004c, #bd00ff);
           display: flex;
           align-items: center;
           justify-content: center;
-          box-shadow: 0 0 14px rgba(255, 0, 76, 0.3);
+          box-shadow: 0 0 12px rgba(255, 0, 76, 0.3);
           flex-shrink: 0;
         }
 
@@ -167,7 +197,7 @@ const YouTubeShowcase = () => {
         .yt-meta {
           display: flex;
           flex-direction: column;
-          gap: 2px;
+          gap: 1px;
           flex-shrink: 0;
         }
 
@@ -175,12 +205,12 @@ const YouTubeShowcase = () => {
           display: inline-flex;
           align-items: center;
           gap: 5px;
-          padding: 2px 8px;
+          padding: 2px 7px;
           background: rgba(189, 0, 255, 0.1);
           border: 1px solid rgba(189, 0, 255, 0.28);
           border-radius: 20px;
           font-family: var(--font-mono);
-          font-size: 8.5px;
+          font-size: 8px;
           color: #d8b4fe;
           text-transform: uppercase;
           letter-spacing: 0.08em;
@@ -188,76 +218,87 @@ const YouTubeShowcase = () => {
         }
 
         .yt-channel-name {
-          font-size: 18px;
+          font-size: 17px;
           color: #fff;
           margin: 0;
           line-height: 1.1;
         }
 
         .yt-handle {
-          font-size: 11.5px;
+          font-size: 11px;
           color: var(--text-secondary);
           margin: 0;
         }
 
         .yt-desc {
-          font-size: 12px;
+          font-size: 11.5px;
           color: var(--text-secondary);
           line-height: 1.5;
           flex: 1;
-          min-width: 180px;
+          min-width: 160px;
           margin: 0;
         }
 
         .yt-visit-btn {
-          font-size: 12px;
-          padding: 7px 16px;
+          font-size: 11.5px;
+          padding: 7px 14px;
           flex-shrink: 0;
           margin-left: auto;
           white-space: nowrap;
         }
 
-        /* ── Videos section ── */
+        /* ── Section title ── */
         .yt-videos-section {
           display: flex;
           flex-direction: column;
-          gap: 12px;
+          gap: 10px;
           flex: 1;
-          min-height: 0;
         }
 
         .yt-section-title {
-          font-size: 20px;
+          font-size: 18px;
           margin: 0;
           flex-shrink: 0;
+          display: flex;
+          align-items: center;
+          gap: 10px;
         }
 
-        /* ── 5-column uniform landscape grid ── */
+        .yt-count {
+          font-family: var(--font-mono);
+          font-size: 10px;
+          color: var(--text-muted);
+          background: rgba(255,255,255,0.04);
+          border: 1px solid rgba(255,255,255,0.06);
+          padding: 2px 8px;
+          border-radius: 20px;
+          font-weight: 400;
+        }
+
+        /* ── 5-column grid, auto-rows to fill evenly ── */
         .yt-grid {
           display: grid;
           grid-template-columns: repeat(5, 1fr);
-          gap: 12px;
-          flex: 1;
-          min-height: 0;
+          grid-auto-rows: 1fr;
+          gap: 10px;
         }
 
         /* ── Individual card ── */
         .yt-card {
-          border-radius: 10px;
+          border-radius: 8px;
           overflow: hidden;
           border: 1px solid rgba(255, 255, 255, 0.05);
           background: rgba(12, 8, 30, 0.4);
           display: flex;
           flex-direction: column;
-          transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+          transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
           text-decoration: none;
-          min-height: 0;
         }
 
         .yt-card:hover {
-          transform: translateY(-4px);
-          border-color: rgba(255, 0, 76, 0.3);
-          box-shadow: 0 14px 36px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,0,76,0.08);
+          transform: translateY(-3px);
+          border-color: rgba(255, 0, 76, 0.28);
+          box-shadow: 0 10px 28px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,0,76,0.07);
         }
 
         /* ── Landscape 16:9 thumbnail ── */
@@ -266,7 +307,7 @@ const YouTubeShowcase = () => {
           width: 100%;
           aspect-ratio: 16 / 9;
           overflow: hidden;
-          background: #000;
+          background: #111;
           flex-shrink: 0;
         }
 
@@ -274,13 +315,13 @@ const YouTubeShowcase = () => {
           width: 100%;
           height: 100%;
           object-fit: cover;
-          opacity: 0.7;
-          transition: transform 0.4s ease, opacity 0.3s ease;
+          opacity: 0.75;
+          transition: transform 0.35s ease, opacity 0.25s ease;
         }
 
         .yt-card:hover .yt-thumb-img {
-          transform: scale(1.07);
-          opacity: 0.88;
+          transform: scale(1.06);
+          opacity: 0.92;
         }
 
         .yt-play-overlay {
@@ -289,76 +330,64 @@ const YouTubeShowcase = () => {
           display: flex;
           align-items: center;
           justify-content: center;
-          background: rgba(0,0,0,0.12);
-          opacity: 0.75;
-          transition: opacity 0.25s ease;
+          background: rgba(0,0,0,0.1);
+          opacity: 0.65;
+          transition: opacity 0.22s ease;
         }
 
         .yt-card:hover .yt-play-overlay { opacity: 1; }
 
         .yt-play-btn {
-          width: 32px;
-          height: 32px;
+          width: 28px;
+          height: 28px;
           border-radius: 50%;
-          background: rgba(255, 0, 76, 0.88);
+          background: rgba(255, 0, 76, 0.9);
           display: flex;
           align-items: center;
           justify-content: center;
-          box-shadow: 0 0 14px rgba(255,0,76,0.5);
+          box-shadow: 0 0 12px rgba(255,0,76,0.55);
           transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
         .yt-card:hover .yt-play-btn {
-          transform: scale(1.14);
-          box-shadow: 0 0 22px rgba(255,0,76,0.7);
+          transform: scale(1.15);
+          box-shadow: 0 0 20px rgba(255,0,76,0.75);
         }
 
         .yt-play-icon { margin-left: 2px; }
 
         .yt-cat-badge {
           position: absolute;
-          bottom: 7px;
-          left: 8px;
+          bottom: 6px;
+          left: 7px;
           font-family: var(--font-mono);
-          font-size: 8.5px;
-          padding: 2px 6px;
-          background: rgba(0,0,0,0.8);
+          font-size: 8px;
+          padding: 1px 5px;
+          background: rgba(0,0,0,0.82);
           border: 1px solid rgba(255,255,255,0.1);
           border-radius: 3px;
-          color: #fff;
+          color: #ccc;
           letter-spacing: 0.04em;
         }
 
         /* ── Card text body ── */
         .yt-card-body {
-          padding: 10px 12px 12px;
+          padding: 8px 10px 10px;
           display: flex;
           flex-direction: column;
+          justify-content: space-between;
           gap: 5px;
           flex: 1;
-          min-height: 0;
         }
 
         .yt-card-title {
-          font-size: 12px;
+          font-size: 11px;
           font-weight: 700;
-          color: #fff;
+          color: #e8e0f5;
           line-height: 1.35;
           margin: 0;
           display: -webkit-box;
           -webkit-line-clamp: 2;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-        }
-
-        .yt-card-desc {
-          font-size: 10.5px;
-          color: var(--text-muted);
-          line-height: 1.45;
-          margin: 0;
-          flex: 1;
-          display: -webkit-box;
-          -webkit-line-clamp: 3;
           -webkit-box-orient: vertical;
           overflow: hidden;
         }
@@ -369,24 +398,26 @@ const YouTubeShowcase = () => {
           gap: 4px;
           color: #ff004c;
           font-family: var(--font-heading);
-          font-size: 9.5px;
+          font-size: 9px;
           font-weight: 700;
           text-transform: uppercase;
           letter-spacing: 0.06em;
-          margin-top: auto;
-          padding-top: 4px;
         }
 
         .yt-ext-icon { transition: transform 0.2s ease; }
         .yt-card:hover .yt-ext-icon { transform: translate(2px, -2px); }
 
         /* ── Responsive ── */
-        @media (max-width: 1200px) {
-          .yt-page { height: auto; overflow: visible; }
+        @media (max-width: 1100px) {
+          .yt-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+
+        @media (max-width: 800px) {
+          .yt-page { height: auto; }
           .yt-grid { grid-template-columns: repeat(3, 1fr); }
         }
 
-        @media (max-width: 700px) {
+        @media (max-width: 560px) {
           .yt-grid { grid-template-columns: repeat(2, 1fr); }
         }
       `}</style>
