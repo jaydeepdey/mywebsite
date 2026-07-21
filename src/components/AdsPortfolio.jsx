@@ -124,39 +124,38 @@ const AdsPortfolio = ({ setActiveSection }) => {
       </div>
 
       <style>{`
-        /* ── Page root: single viewport height in landscape ── */
+        /* ── Page root ── */
         .ads-page {
           display: flex;
           flex-direction: column;
-          height: calc(100vh - 80px);
-          padding: 16px 0 10px;
-          gap: 14px;
-          overflow: hidden;
+          padding: 20px 0 40px;
+          gap: 20px;
+          max-width: 1200px;
+          margin: 0 auto;
         }
 
         /* ── Compact header ── */
         .ads-header {
           display: flex;
           align-items: center;
-          gap: 14px;
-          padding: 12px 18px;
+          gap: 16px;
+          padding: 16px 22px;
           border-radius: 14px;
           border: 1px solid rgba(255, 255, 255, 0.07);
           background: rgba(18, 12, 45, 0.3);
-          flex-shrink: 0;
           flex-wrap: wrap;
         }
 
         .ads-header-ring {
-          width: 44px;
-          height: 44px;
+          width: 48px;
+          height: 48px;
           border-radius: 50%;
           padding: 2px;
           background: linear-gradient(135deg, #ff004c, #bd00ff);
           display: flex;
           align-items: center;
           justify-content: center;
-          box-shadow: 0 0 12px rgba(255, 0, 76, 0.3);
+          box-shadow: 0 0 14px rgba(255, 0, 76, 0.3);
           flex-shrink: 0;
         }
 
@@ -178,7 +177,7 @@ const AdsPortfolio = ({ setActiveSection }) => {
         .ads-meta {
           display: flex;
           flex-direction: column;
-          gap: 1px;
+          gap: 2px;
           flex-shrink: 0;
         }
 
@@ -186,12 +185,12 @@ const AdsPortfolio = ({ setActiveSection }) => {
           display: inline-flex;
           align-items: center;
           gap: 5px;
-          padding: 2px 7px;
+          padding: 2px 8px;
           background: rgba(189, 0, 255, 0.1);
           border: 1px solid rgba(189, 0, 255, 0.28);
           border-radius: 20px;
           font-family: var(--font-mono);
-          font-size: 8px;
+          font-size: 8.5px;
           color: #d8b4fe;
           text-transform: uppercase;
           letter-spacing: 0.08em;
@@ -199,30 +198,30 @@ const AdsPortfolio = ({ setActiveSection }) => {
         }
 
         .ads-title {
-          font-size: 17px;
+          font-size: 20px;
           color: #fff;
           margin: 0;
           line-height: 1.1;
         }
 
         .ads-subtitle {
-          font-size: 11px;
+          font-size: 12px;
           color: var(--text-secondary);
           margin: 0;
         }
 
         .ads-desc {
-          font-size: 11.5px;
+          font-size: 12.5px;
           color: var(--text-secondary);
-          line-height: 1.45;
+          line-height: 1.5;
           flex: 1;
-          min-width: 160px;
+          min-width: 220px;
           margin: 0;
         }
 
         .ads-playlist-btn {
-          font-size: 11.5px;
-          padding: 7px 14px;
+          font-size: 12px;
+          padding: 8px 16px;
           flex-shrink: 0;
           margin-left: auto;
           white-space: nowrap;
@@ -232,15 +231,14 @@ const AdsPortfolio = ({ setActiveSection }) => {
         .ads-announcement {
           display: flex;
           align-items: center;
-          gap: 10px;
+          gap: 12px;
           width: 100%;
-          padding: 9px 15px;
+          padding: 11px 18px;
           background: linear-gradient(90deg, rgba(255,180,0,0.08) 0%, rgba(255,140,0,0.06) 100%);
           border: 1px solid rgba(255,180,0,0.3);
           border-radius: 10px;
           cursor: pointer;
           text-align: left;
-          flex-shrink: 0;
           transition: background 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
           animation: ads-banner-glow 3s ease-in-out infinite;
         }
@@ -273,27 +271,27 @@ const AdsPortfolio = ({ setActiveSection }) => {
 
         .ads-announcement-label {
           font-family: var(--font-mono);
-          font-size: 9px;
+          font-size: 9.5px;
           font-weight: 700;
           letter-spacing: 0.12em;
           color: #f59e0b;
           background: rgba(245,158,11,0.12);
           border: 1px solid rgba(245,158,11,0.3);
-          padding: 2px 7px;
+          padding: 3px 8px;
           border-radius: 4px;
           white-space: nowrap;
           flex-shrink: 0;
         }
 
         .ads-announcement-text {
-          font-size: 12.5px;
+          font-size: 13px;
           color: #fde68a;
           line-height: 1.4;
           flex: 1;
         }
 
         .ads-announcement-cta {
-          font-size: 12px;
+          font-size: 12.5px;
           font-family: var(--font-mono);
           color: #f59e0b;
           white-space: nowrap;
@@ -310,43 +308,37 @@ const AdsPortfolio = ({ setActiveSection }) => {
         .ads-campaigns-section {
           display: flex;
           flex-direction: column;
-          gap: 10px;
-          flex: 1;
-          min-height: 0;
+          gap: 14px;
         }
 
         .ads-section-title {
-          font-size: 18px;
+          font-size: 22px;
           margin: 0;
-          flex-shrink: 0;
         }
 
         /* ── 4 Columns Single Row Grid ── */
         .ads-grid {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
-          gap: 12px;
-          flex: 1;
-          min-height: 0;
+          gap: 16px;
         }
 
         /* ── Card ── */
         .ads-card {
-          border-radius: 10px;
+          border-radius: 12px;
           overflow: hidden;
-          border: 1px solid rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.06);
           background: rgba(12, 8, 30, 0.4);
           display: flex;
           flex-direction: column;
           transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
           text-decoration: none;
-          min-height: 0;
         }
 
         .ads-card:hover {
           transform: translateY(-4px);
-          border-color: rgba(255, 0, 76, 0.3);
-          box-shadow: 0 14px 36px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,0,76,0.08);
+          border-color: rgba(255, 0, 76, 0.35);
+          box-shadow: 0 14px 36px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,0,76,0.1);
         }
 
         /* ── 16:9 Thumbnail ── */
@@ -363,13 +355,13 @@ const AdsPortfolio = ({ setActiveSection }) => {
           width: 100%;
           height: 100%;
           object-fit: cover;
-          opacity: 0.75;
+          opacity: 0.78;
           transition: transform 0.4s ease, opacity 0.3s ease;
         }
 
         .ads-card:hover .ads-thumb-img {
           transform: scale(1.07);
-          opacity: 0.92;
+          opacity: 0.95;
         }
 
         .ads-play-overlay {
@@ -378,7 +370,7 @@ const AdsPortfolio = ({ setActiveSection }) => {
           display: flex;
           align-items: center;
           justify-content: center;
-          background: rgba(0,0,0,0.12);
+          background: rgba(0,0,0,0.15);
           opacity: 0.75;
           transition: opacity 0.25s ease;
         }
@@ -386,8 +378,8 @@ const AdsPortfolio = ({ setActiveSection }) => {
         .ads-card:hover .ads-play-overlay { opacity: 1; }
 
         .ads-play-btn {
-          width: 32px;
-          height: 32px;
+          width: 36px;
+          height: 36px;
           border-radius: 50%;
           background: rgba(255, 0, 76, 0.88);
           display: flex;
@@ -406,26 +398,25 @@ const AdsPortfolio = ({ setActiveSection }) => {
 
         .ads-cat-badge {
           position: absolute;
-          bottom: 7px;
+          bottom: 8px;
           left: 8px;
           font-family: var(--font-mono);
           font-size: 8.5px;
-          padding: 2px 6px;
+          padding: 2px 7px;
           background: rgba(0,0,0,0.82);
-          border: 1px solid rgba(255,255,255,0.1);
-          border-radius: 3px;
+          border: 1px solid rgba(255,255,255,0.12);
+          border-radius: 4px;
           color: #fff;
           letter-spacing: 0.04em;
         }
 
         /* ── Card Body ── */
         .ads-card-body {
-          padding: 10px 12px 12px;
+          padding: 14px 16px 16px;
           display: flex;
           flex-direction: column;
-          gap: 5px;
+          gap: 6px;
           flex: 1;
-          min-height: 0;
         }
 
         .ads-card-subtitle {
@@ -433,53 +424,45 @@ const AdsPortfolio = ({ setActiveSection }) => {
           font-size: 9.5px;
           color: var(--text-muted);
           text-transform: uppercase;
-          letter-spacing: 0.05em;
+          letter-spacing: 0.06em;
         }
 
         .ads-card-title {
-          font-size: 12.5px;
+          font-size: 13.5px;
           font-weight: 700;
           color: #fff;
           line-height: 1.35;
           margin: 0;
-          display: -webkit-box;
-          -webkit-line-clamp: 2;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
         }
 
         .ads-card-desc {
-          font-size: 11px;
-          color: var(--text-muted);
-          line-height: 1.45;
-          margin: 0;
+          font-size: 12px;
+          color: var(--text-secondary);
+          line-height: 1.5;
+          margin: 2px 0 0;
           flex: 1;
-          display: -webkit-box;
-          -webkit-line-clamp: 3;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
         }
 
         .ads-card-footer {
           display: flex;
           align-items: center;
-          gap: 4px;
+          gap: 5px;
           color: #ff004c;
           font-family: var(--font-heading);
-          font-size: 9.5px;
+          font-size: 10px;
           font-weight: 700;
           text-transform: uppercase;
           letter-spacing: 0.06em;
-          margin-top: auto;
-          padding-top: 4px;
+          margin-top: 14px;
+          padding-top: 8px;
+          border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .ads-ext-icon { transition: transform 0.2s ease; }
         .ads-card:hover .ads-ext-icon { transform: translate(2px, -2px); }
 
         /* ── Responsive ── */
-        @media (max-width: 1100px) {
-          .ads-page { height: auto; overflow: visible; }
+        @media (max-width: 1024px) {
           .ads-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
