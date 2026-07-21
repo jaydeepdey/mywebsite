@@ -336,8 +336,7 @@ const SaaSProducts = ({ setActiveSection }) => {
         .sp-panel::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 4px; }
 
         .sp-left {
-          width: 38%;
-          flex-shrink: 0;
+          flex: 1;
           border-right: none;
           background: rgba(6, 4, 18, 0.3);
         }
