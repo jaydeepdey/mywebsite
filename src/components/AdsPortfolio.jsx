@@ -1,7 +1,7 @@
 import React from 'react';
 import { ExternalLink, Play, Sparkles } from 'lucide-react';
 
-const AdsPortfolio = () => {
+const AdsPortfolio = ({ setActiveSection }) => {
   const playlistUrl = "https://www.youtube.com/playlist?list=PLfr4BLye7EV0";
 
   const campaigns = [
@@ -67,7 +67,15 @@ const AdsPortfolio = () => {
         </a>
       </div>
 
-      {/* ── Campaign Grid ── */}
+      {/* ── Announcement Banner ── */}
+      <button className="ads-announcement" onClick={() => setActiveSection('contact')}>
+        <span className="ads-announcement-pulse" />
+        <span className="ads-announcement-label">FREE OFFER</span>
+        <span className="ads-announcement-text">
+          Get your Ads made free — connect with me with your requirement and let’s create something extraordinary.
+        </span>
+        <span className="ads-announcement-cta">Connect now →</span>
+      </button>
       <div className="campaigns-section">
         <h2 className="campaigns-section-title title-font">Featured <span className="text-gradient">Campaigns</span></h2>
         
@@ -114,6 +122,83 @@ const AdsPortfolio = () => {
           gap: 48px;
           max-width: 900px;
           margin: 0 auto;
+        }
+
+        /* Announcement Banner */
+        .ads-announcement {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          width: 100%;
+          padding: 10px 16px;
+          background: linear-gradient(90deg, rgba(255,180,0,0.08) 0%, rgba(255,140,0,0.06) 100%);
+          border: 1px solid rgba(255,180,0,0.3);
+          border-radius: 10px;
+          cursor: pointer;
+          text-align: left;
+          transition: background 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+          animation: ads-banner-glow 3s ease-in-out infinite;
+        }
+
+        .ads-announcement:hover {
+          background: linear-gradient(90deg, rgba(255,180,0,0.15) 0%, rgba(255,140,0,0.12) 100%);
+          border-color: rgba(255,180,0,0.55);
+          transform: translateY(-1px);
+        }
+
+        @keyframes ads-banner-glow {
+          0%, 100% { box-shadow: 0 0 0px rgba(255,180,0,0); }
+          50% { box-shadow: 0 0 16px rgba(255,180,0,0.18); }
+        }
+
+        .ads-announcement-pulse {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: #f59e0b;
+          flex-shrink: 0;
+          animation: ads-pulse-dot 1.5s ease-in-out infinite;
+          box-shadow: 0 0 6px rgba(245, 158, 11, 0.8);
+        }
+
+        @keyframes ads-pulse-dot {
+          0%, 100% { transform: scale(1); opacity: 1; }
+          50% { transform: scale(1.4); opacity: 0.7; }
+        }
+
+        .ads-announcement-label {
+          font-family: var(--font-mono);
+          font-size: 9px;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          color: #f59e0b;
+          background: rgba(245,158,11,0.12);
+          border: 1px solid rgba(245,158,11,0.3);
+          padding: 2px 7px;
+          border-radius: 4px;
+          white-space: nowrap;
+          flex-shrink: 0;
+        }
+
+        .ads-announcement-text {
+          font-size: 12.5px;
+          color: #fde68a;
+          line-height: 1.4;
+          flex: 1;
+        }
+
+        .ads-announcement-cta {
+          font-size: 12px;
+          font-family: var(--font-mono);
+          color: #f59e0b;
+          white-space: nowrap;
+          flex-shrink: 0;
+          font-weight: 600;
+          transition: letter-spacing 0.2s ease;
+        }
+
+        .ads-announcement:hover .ads-announcement-cta {
+          letter-spacing: 0.05em;
         }
 
         /* Playlist Header Card */

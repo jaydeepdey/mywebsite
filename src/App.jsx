@@ -86,7 +86,7 @@ function App() {
       case 'saas':
         return <SaaSProducts setActiveSection={setActiveSection} />;
       case 'ads':
-        return <AdsPortfolio />;
+        return <AdsPortfolio setActiveSection={setActiveSection} />;
       case 'youtube':
         return <YouTubeShowcase />;
       case 'gallery':

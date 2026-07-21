@@ -94,6 +94,16 @@ const SaaSProducts = ({ setActiveSection }) => {
         <p className="sp-subtitle">Lightweight, hyper-focused tools built to solve specific bottlenecks at serverless edge speeds.</p>
       </div>
 
+      {/* ── Announcement Banner ── */}
+      <button className="sp-announcement" onClick={() => setActiveSection('contact')}>
+        <span className="sp-announcement-pulse" />
+        <span className="sp-announcement-label">LIMITED TIME FREE OFFER</span>
+        <span className="sp-announcement-text">
+          Connect with me with your idea and get your Software built — absolutely free.
+        </span>
+        <span className="sp-announcement-cta">Connect now →</span>
+      </button>
+
       {/* ── Two-Panel Frame ── */}
       <div className="sp-frame">
 
@@ -275,6 +285,84 @@ const SaaSProducts = ({ setActiveSection }) => {
           flex-direction: column;
           gap: 6px;
           flex-shrink: 0;
+        }
+
+        /* ── Announcement Banner ── */
+        .sp-announcement {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          width: 100%;
+          padding: 10px 16px;
+          background: linear-gradient(90deg, rgba(255,180,0,0.08) 0%, rgba(255,140,0,0.06) 100%);
+          border: 1px solid rgba(255,180,0,0.3);
+          border-radius: 10px;
+          cursor: pointer;
+          text-align: left;
+          flex-shrink: 0;
+          transition: background 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+          animation: banner-glow 3s ease-in-out infinite;
+        }
+
+        .sp-announcement:hover {
+          background: linear-gradient(90deg, rgba(255,180,0,0.15) 0%, rgba(255,140,0,0.12) 100%);
+          border-color: rgba(255,180,0,0.55);
+          transform: translateY(-1px);
+        }
+
+        @keyframes banner-glow {
+          0%, 100% { box-shadow: 0 0 0px rgba(255,180,0,0); }
+          50% { box-shadow: 0 0 16px rgba(255,180,0,0.18); }
+        }
+
+        .sp-announcement-pulse {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: #f59e0b;
+          flex-shrink: 0;
+          animation: pulse-dot 1.5s ease-in-out infinite;
+          box-shadow: 0 0 6px rgba(245, 158, 11, 0.8);
+        }
+
+        @keyframes pulse-dot {
+          0%, 100% { transform: scale(1); opacity: 1; }
+          50% { transform: scale(1.4); opacity: 0.7; }
+        }
+
+        .sp-announcement-label {
+          font-family: var(--font-mono);
+          font-size: 9px;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          color: #f59e0b;
+          background: rgba(245,158,11,0.12);
+          border: 1px solid rgba(245,158,11,0.3);
+          padding: 2px 7px;
+          border-radius: 4px;
+          white-space: nowrap;
+          flex-shrink: 0;
+        }
+
+        .sp-announcement-text {
+          font-size: 12.5px;
+          color: #fde68a;
+          line-height: 1.4;
+          flex: 1;
+        }
+
+        .sp-announcement-cta {
+          font-size: 12px;
+          font-family: var(--font-mono);
+          color: #f59e0b;
+          white-space: nowrap;
+          flex-shrink: 0;
+          font-weight: 600;
+          transition: letter-spacing 0.2s ease;
+        }
+
+        .sp-announcement:hover .sp-announcement-cta {
+          letter-spacing: 0.05em;
         }
 
         .sp-badge {
