@@ -31,9 +31,8 @@ const SaaSProducts = ({ setActiveSection }) => {
   const [apiError, setApiError] = useState(''); // API error message
 
   // The base URL of the FastAPI server.
-  // For local dev: http://localhost:8000
-  // When you deploy the API to the cloud, change this one line.
-  const API_BASE_URL = 'http://localhost:8000';
+  // Production API hosted on Render.com
+  const API_BASE_URL = 'https://content-repurposing-api.onrender.com';
 
   // Output content state
   const [outputs, setOutputs] = useState({
